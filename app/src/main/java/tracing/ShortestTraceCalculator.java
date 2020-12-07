@@ -10,7 +10,10 @@ public final class ShortestTraceCalculator {
         // utility class
     }
 
-    // Dijkstra's algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+    /**
+     * Dijkstra's algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+     * with a slight variation to account for cycles. In this case it is assume that the node distance cannot be 0
+     */
     public static int calculateShortestTrace(final String start, final String end, final Map<String, Node> nodes) {
         Map<String, Integer> nodeDistances = new HashMap<>();
         for (Node node : nodes.values()) {
