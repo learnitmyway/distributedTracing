@@ -1,0 +1,42 @@
+package tracing;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+//CHECKSTYLE.OFF: MagicNumber
+public class GraphGeneratorTest {
+    @Test
+    void generatesGraphFromInput() {
+        String input = "DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6";
+        Set<Node> nodes = GraphGenerator.generateGraphFrom(input);
+
+        assertEquals(6, nodes.size());
+
+        Node e = null;
+        for (Node node : nodes) {
+            if ("E".equals(node.id)) {
+                e = node;
+            }
+        }
+
+        assertNotNull(e);
+        assertEquals(2, e.getAdjacentEdges().size());
+
+        Edge edge1 = e.getAdjacentEdges().get(0);
+        Edge edge2 = e.getAdjacentEdges().get(1);
+
+        // FIXME: surely there a simpler way to test this?
+        assertEquals("E", edge1.src.id);
+        assertEquals("C", edge1.dest.id);
+        assertEquals(7, edge1.weight);
+        assertEquals("E", edge2.src.id);
+        assertEquals("G", edge2.dest.id);
+        assertEquals(6, edge2.weight);
+    }
+}
+//CHECKSTYLE.ON: MagicNumber
+

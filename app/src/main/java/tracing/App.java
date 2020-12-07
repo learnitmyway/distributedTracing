@@ -16,7 +16,8 @@ public final class App {
     }
 
     public static List<String> run() throws IOException {
-        FileParser.parse("src/main/resources/input.txt");
+        String input = FileParser.parse("src/main/resources/input.txt");
+        GraphGenerator.generateGraphFrom(input);
         List<String> outputLines = new ArrayList<>();
         outputLines.add("1. 9");
         outputLines.add("2. 5");
