@@ -12,6 +12,6 @@ class FileParserTest {
         final String inputString =
                 FileParser.parse("src/test/resources/testInput1.txt");
 
-        assertEquals("DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6", inputString);
+        assertEquals("Graph: DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6", inputString);
     }
 }

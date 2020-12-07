@@ -9,7 +9,7 @@ public final class GraphGenerator {
     }
 
     public static Map<String, Node> generateGraphFrom(final String input) {
-        String[] attributes = input.split(", ");
+        String[] attributes = input.split("Graph: ")[1].split(", ");
         Map<String, Node> nodes = new HashMap<>();
         for (String attribute : attributes) {
             Node src = addNodeIfNew(nodes, attribute.substring(0, 1));

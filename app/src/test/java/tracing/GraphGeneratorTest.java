@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GraphGeneratorTest {
     @Test
     void generatesGraphFromInput() {
-        String input = "DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6";
+        String input = "Graph: DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6";
         Map<String, Node> nodes = GraphGenerator.generateGraphFrom(input);
 
         assertEquals(6, nodes.size());
