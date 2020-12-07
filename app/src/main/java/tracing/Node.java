@@ -13,7 +13,7 @@ public final class Node {
     }
 
     public void addEdge(final Edge edge) {
-        this.getAdjacentEdges().add(edge);
+        this.adjacentEdges.add(edge);
     }
 
     public List<Edge> getAdjacentEdges() {
