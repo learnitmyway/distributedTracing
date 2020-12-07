@@ -2,7 +2,9 @@ package tracing;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public final class App {
     private App() {
@@ -17,12 +19,16 @@ public final class App {
 
     public static List<String> run() throws IOException {
         String input = FileParser.parse("src/main/resources/input.txt");
-        GraphGenerator.generateGraphFrom(input);
+        Set<Node> nodes = GraphGenerator.generateGraphFrom(input);
         List<String> outputLines = new ArrayList<>();
-        outputLines.add("1. 9");
-        outputLines.add("2. 5");
-        outputLines.add("3. 13");
-        outputLines.add("4. 22");
+        outputLines.add("1. " +
+                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "B", "C"), nodes));
+        outputLines.add("2. " +
+                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "D"), nodes));
+        outputLines.add("3. " +
+                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "D", "C"), nodes));
+        outputLines.add("4. " +
+                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "E", "B", "C", "D"), nodes));
         outputLines.add("5. NO SUCH TRACE");
         outputLines.add("6. 2");
         outputLines.add("7. 3");
@@ -32,5 +38,4 @@ public final class App {
 
         return outputLines;
     }
-
 }
