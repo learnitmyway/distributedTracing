@@ -11,7 +11,7 @@ public final class TraceCountCalculator {
         // utility class
     }
 
-    public static int calculateTraceCount(final String start, final String end, final int maxHops, final Map<String, Node> nodes) {
+    public static int calculateTraceCount(final String start, final String end, final int minHops, final int maxHops, final Map<String, Node> nodes) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithHops = new ArrayDeque<>();
         queueWithHops.add(new SimpleEntry<>(nodes.get(start), 0));
@@ -22,7 +22,7 @@ public final class TraceCountCalculator {
             int currentHop = entry.getValue() + 1;
             if (currentHop <= maxHops) {
                 for (Edge edge : currentNode.getAdjacentEdges()) {
-                    if (nodes.get(end).equals(edge.dest)) {
+                    if (currentHop >= minHops && nodes.get(end).equals(edge.dest)) {
                         traceCount++;
                     }
                     queueWithHops.add(new SimpleEntry<>(edge.dest, currentHop));
