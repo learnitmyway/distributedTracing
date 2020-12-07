@@ -26,7 +26,7 @@ public final class App {
         outputLines.add(getAverageLatencyAnswer(3, Arrays.asList("A", "D", "C"), nodes));
         outputLines.add(getAverageLatencyAnswer(4, Arrays.asList("A", "E", "B", "C", "D"), nodes));
         outputLines.add(getAverageLatencyAnswer(5, Arrays.asList("A", "E", "D"), nodes));
-        outputLines.add("6. 2");
+        outputLines.add("6. " + TraceCountCalculator.calculateTraceCount("C", "C", 3, nodes));
         outputLines.add("7. 3");
         outputLines.add("8. 9");
         outputLines.add("9. 9");
