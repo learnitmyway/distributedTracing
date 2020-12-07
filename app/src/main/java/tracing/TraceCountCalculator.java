@@ -11,6 +11,9 @@ public final class TraceCountCalculator {
         // utility class
     }
 
+    /**
+     * A variation of Breadth-First Search where the hop count is used to determine when to stop searching
+     */
     public static int calculateTraceCountWithHops(final String start, final String end, final int minHops, final int maxHops, final Map<String, Node> nodes) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithHops = new ArrayDeque<>();
@@ -35,6 +38,9 @@ public final class TraceCountCalculator {
         return traceCount;
     }
 
+    /**
+     * A variation of Breadth-First Search where the max latency is used to determine when to stop searching
+     */
     public static int calculateTraceCountWithMaxLatency(final String start, final String end, final int maxLatency, final Map<String, Node> nodes) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithLatency = new ArrayDeque<>();
