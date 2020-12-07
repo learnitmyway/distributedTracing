@@ -2,9 +2,8 @@ package tracing;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,7 +25,12 @@ public class TraceCountCalculatorTest {
         c.addEdge(edgeCD);
         d.addEdge(edgeDC);
 
-        Set<Node> nodes = new HashSet<>(Arrays.asList(f, d, b));
+        Map<String, Node> nodes = new HashMap<>();
+        nodes.put(b.id, b);
+        nodes.put(c.id, c);
+        nodes.put(d.id, d);
+        nodes.put(f.id, f);
+
         int traceCount = TraceCountCalculator.calculateTraceCount("D", "D", 2, nodes);
 
         // DC -> CD

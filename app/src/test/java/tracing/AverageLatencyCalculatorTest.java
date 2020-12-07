@@ -3,8 +3,8 @@ package tracing;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +21,10 @@ public class AverageLatencyCalculatorTest {
         d.addEdge(edgeDB);
         b.addEdge(edgeBF);
 
-        Set<Node> nodes = new HashSet<>(Arrays.asList(b, d, f));
+        Map<String, Node> nodes = new HashMap<>();
+        nodes.put(b.id, b);
+        nodes.put(d.id, d);
+        nodes.put(f.id, f);
         int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("D", "B", "F"), nodes);
 
         assertEquals(5, averageLatency);
@@ -38,7 +41,11 @@ public class AverageLatencyCalculatorTest {
         d.addEdge(edgeDB);
         b.addEdge(edgeBF);
 
-        Set<Node> nodes = new HashSet<>(Arrays.asList(f, d, b));
+        Map<String, Node> nodes = new HashMap<>();
+        nodes.put(b.id, b);
+        nodes.put(d.id, d);
+        nodes.put(f.id, f);
+
         int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("F", "B", "D"), nodes);
 
         assertEquals(-1, averageLatency);

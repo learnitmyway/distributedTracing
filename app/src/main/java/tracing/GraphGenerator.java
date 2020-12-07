@@ -1,16 +1,14 @@
 package tracing;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public final class GraphGenerator {
     private GraphGenerator() {
         // utility class
     }
 
-    public static Set<Node> generateGraphFrom(final String input) {
+    public static Map<String, Node> generateGraphFrom(final String input) {
         String[] attributes = input.split(", ");
         Map<String, Node> nodes = new HashMap<>();
         for (String attribute : attributes) {
@@ -20,7 +18,7 @@ public final class GraphGenerator {
             GraphGenerator.addEdgeToSourceNode(new Edge(src, dest, weight));
         }
 
-        return new HashSet<>(nodes.values());
+        return nodes;
     }
 
     private static Node addNodeIfNew(

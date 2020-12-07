@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public final class App {
     private App() {
@@ -19,7 +19,7 @@ public final class App {
 
     public static List<String> run() throws IOException {
         String input = FileParser.parse("src/main/resources/input.txt");
-        Set<Node> nodes = GraphGenerator.generateGraphFrom(input);
+        Map<String, Node> nodes = GraphGenerator.generateGraphFrom(input);
         List<String> outputLines = new ArrayList<>();
         outputLines.add(getAverageLatencyAnswer(1, Arrays.asList("A", "B", "C"), nodes));
         outputLines.add(getAverageLatencyAnswer(2, Arrays.asList("A", "D"), nodes));
@@ -36,7 +36,7 @@ public final class App {
     }
 
     private static String getAverageLatencyAnswer(
-            final int questionNumber, final List<String> path, final Set<Node> nodes) {
+            final int questionNumber, final List<String> path, final Map<String, Node> nodes) {
         int averageLatency = AverageLatencyCalculator.calculateLatency(path, nodes);
         return String.format("%d. %s",
                 questionNumber,

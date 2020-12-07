@@ -2,28 +2,19 @@ package tracing;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-//CHECKSTYLE.OFF: MagicNumber
 public class GraphGeneratorTest {
     @Test
     void generatesGraphFromInput() {
         String input = "DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6";
-        Set<Node> nodes = GraphGenerator.generateGraphFrom(input);
+        Map<String, Node> nodes = GraphGenerator.generateGraphFrom(input);
 
         assertEquals(6, nodes.size());
 
-        Node e = null;
-        for (Node node : nodes) {
-            if ("E".equals(node.id)) {
-                e = node;
-            }
-        }
-
-        assertNotNull(e);
+        Node e = nodes.get("E");
         assertEquals(2, e.getAdjacentEdges().size());
 
         Edge edge1 = e.getAdjacentEdges().get(0);
@@ -38,5 +29,4 @@ public class GraphGeneratorTest {
         assertEquals(6, edge2.weight);
     }
 }
-//CHECKSTYLE.ON: MagicNumber
 
