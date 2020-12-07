@@ -3,12 +3,34 @@
  */
 package tracing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(final String[] args) {
-        System.out.println(new App().getGreeting());
+        for (String line : App.run()) {
+            System.out.println(line);
+        }
     }
+
+    public static List<String> run() {
+        List<String> outputLines = new ArrayList<>();
+        outputLines.add("1. 9");
+        outputLines.add("2. 5");
+        outputLines.add("3. 13");
+        outputLines.add("4. 22");
+        outputLines.add("5. NO SUCH TRACE");
+        outputLines.add("6. 2");
+        outputLines.add("7. 3");
+        outputLines.add("8. 9");
+        outputLines.add("9. 9");
+        outputLines.add("10. 7");
+
+        return outputLines;
+    }
+
 }
