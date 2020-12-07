@@ -8,6 +8,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShortestTraceCalculatorTest {
+
     @Test
     void calculatesShortestTrace() {
         Node b = new Node("B");
@@ -35,6 +36,38 @@ public class ShortestTraceCalculatorTest {
 
         // C -> F -> D
         assertEquals(5, shortestTrace);
+    }
+
+    @Test
+    void calculatesShortestTraceWithAnotherGraph() {
+        Node a = new Node("A");
+        Node b = new Node("B");
+        Node c = new Node("C");
+        Node d = new Node("D");
+        Node e = new Node("E");
+        Edge edgeAE = new Edge(a, e, 10);
+        Edge edgeEC = new Edge(e, c, 20);
+        Edge edgeAD = new Edge(a, d, 1);
+        Edge edgeDB = new Edge(d, b, 2);
+        Edge edgeBC = new Edge(b, c, 3);
+
+        a.addEdge(edgeAE);
+        a.addEdge(edgeAD);
+        b.addEdge(edgeBC);
+        d.addEdge(edgeDB);
+        e.addEdge(edgeEC);
+
+        Map<String, Node> nodes = new HashMap<>();
+        nodes.put(a.id, a);
+        nodes.put(b.id, b);
+        nodes.put(c.id, c);
+        nodes.put(d.id, d);
+        nodes.put(e.id, e);
+
+        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("A", "C", nodes);
+
+        // A -> D -> B -> C
+        assertEquals(6, shortestTrace);
     }
 
     @Test
