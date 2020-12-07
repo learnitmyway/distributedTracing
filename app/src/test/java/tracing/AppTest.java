@@ -2,6 +2,7 @@ package tracing;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppTest {
     @Test
-    void returnsOutput() {
+    void returnsOutput() throws IOException {
         List<String> outputLines = new ArrayList<>();
         outputLines.add("1. 9");
         outputLines.add("2. 5");

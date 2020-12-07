@@ -1,5 +1,6 @@
 package tracing;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +9,14 @@ public final class App {
         // utility class
     }
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         for (String line : App.run()) {
             System.out.println(line);
         }
     }
 
-    public static List<String> run() {
+    public static List<String> run() throws IOException {
+        FileParser.parse("src/main/resources/input.txt");
         List<String> outputLines = new ArrayList<>();
         outputLines.add("1. 9");
         outputLines.add("2. 5");
