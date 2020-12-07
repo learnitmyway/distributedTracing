@@ -33,14 +33,17 @@ public final class ShortestTraceCalculator {
 
             unvistedNodes.remove(nodeWithMinDistance);
 
-            if (end.equals(nodeWithMinDistance.id)) {
+            if (end.equals(nodeWithMinDistance.id) && nodeDistances.get(end) != 0) {
                 break;
             }
-           
+
             for (Edge edge : nodeWithMinDistance.getAdjacentEdges()) {
-                int potentialMinDistance = nodeDistances.get(nodeWithMinDistance.id) + edge.weight;
-                if (potentialMinDistance < nodeDistances.get(edge.dest.id)) {
-                    nodeDistances.put(edge.dest.id, potentialMinDistance);
+                Integer distance = nodeDistances.get(nodeWithMinDistance.id);
+                if (distance != Integer.MAX_VALUE) {
+                    int potentialMinDistance = distance + edge.weight;
+                    if (potentialMinDistance < nodeDistances.get(edge.dest.id) || nodeDistances.get(edge.dest.id) == 0) {
+                        nodeDistances.put(edge.dest.id, potentialMinDistance);
+                    }
                 }
             }
 
