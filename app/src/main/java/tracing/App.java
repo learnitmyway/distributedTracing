@@ -21,15 +21,11 @@ public final class App {
         String input = FileParser.parse("src/main/resources/input.txt");
         Set<Node> nodes = GraphGenerator.generateGraphFrom(input);
         List<String> outputLines = new ArrayList<>();
-        outputLines.add("1. " +
-                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "B", "C"), nodes));
-        outputLines.add("2. " +
-                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "D"), nodes));
-        outputLines.add("3. " +
-                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "D", "C"), nodes));
-        outputLines.add("4. " +
-                AverageLatencyCalculator.calculateLatency(Arrays.asList("A", "E", "B", "C", "D"), nodes));
-        outputLines.add("5. NO SUCH TRACE");
+        outputLines.add(getAverageLatencyAnswer(1, Arrays.asList("A", "B", "C"), nodes));
+        outputLines.add(getAverageLatencyAnswer(2, Arrays.asList("A", "D"), nodes));
+        outputLines.add(getAverageLatencyAnswer(3, Arrays.asList("A", "D", "C"), nodes));
+        outputLines.add(getAverageLatencyAnswer(4, Arrays.asList("A", "E", "B", "C", "D"), nodes));
+        outputLines.add(getAverageLatencyAnswer(5, Arrays.asList("A", "E", "D"), nodes));
         outputLines.add("6. 2");
         outputLines.add("7. 3");
         outputLines.add("8. 9");
@@ -37,5 +33,14 @@ public final class App {
         outputLines.add("10. 7");
 
         return outputLines;
+    }
+
+    private static String getAverageLatencyAnswer(
+            final int questionNumber, final List<String> path, final Set<Node> nodes) {
+        int averageLatency = AverageLatencyCalculator.calculateLatency(path, nodes);
+        return String.format("%d. %s",
+                questionNumber,
+                averageLatency > -1 ? averageLatency : "NO SUCH TRACE"
+        );
     }
 }

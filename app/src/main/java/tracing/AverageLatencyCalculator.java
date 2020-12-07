@@ -20,6 +20,8 @@ public final class AverageLatencyCalculator {
                         findEdgeWithMatchingDest(destId, sourceNode.get());
                 if (edgeWithMatchingDest.isPresent()) {
                     averageLatency += edgeWithMatchingDest.get().weight;
+                } else {
+                    return -1;
                 }
             }
         }

@@ -28,5 +28,20 @@ public class AverageLatencyCalculatorTest {
     }
     //CHECKSTYLE.ON: MagicNumber
 
+    @Test
+    void noSuchTrace() {
+        Node b = new Node("B");
+        Node d = new Node("D");
+        Node f = new Node("F");
+        Edge edgeDB = new Edge(d, b, 1);
+        Edge edgeBF = new Edge(b, f, 4);
+        d.addEdge(edgeDB);
+        b.addEdge(edgeBF);
+
+        Set<Node> nodes = new HashSet<>(Arrays.asList(f, d, b));
+        int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("F", "B", "D"), nodes);
+
+        assertEquals(-1, averageLatency);
+    }
 }
 
