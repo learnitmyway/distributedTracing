@@ -31,6 +31,12 @@ public final class ShortestTraceCalculator {
                 }
             }
 
+            unvistedNodes.remove(nodeWithMinDistance);
+
+            if (end.equals(nodeWithMinDistance.id)) {
+                break;
+            }
+           
             for (Edge edge : nodeWithMinDistance.getAdjacentEdges()) {
                 int potentialMinDistance = nodeDistances.get(nodeWithMinDistance.id) + edge.weight;
                 if (potentialMinDistance < nodeDistances.get(edge.dest.id)) {
@@ -38,11 +44,6 @@ public final class ShortestTraceCalculator {
                 }
             }
 
-            unvistedNodes.remove(nodeWithMinDistance);
-
-            if (end.equals(nodeWithMinDistance.id)) {
-                break;
-            }
         }
 
         return nodeDistances.get(end);

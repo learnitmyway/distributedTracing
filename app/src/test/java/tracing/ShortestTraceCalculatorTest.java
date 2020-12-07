@@ -33,6 +33,7 @@ public class ShortestTraceCalculatorTest {
 
         int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("C", "D", nodes);
 
+        // C -> F -> D
         assertEquals(5, shortestTrace);
     }
 }
