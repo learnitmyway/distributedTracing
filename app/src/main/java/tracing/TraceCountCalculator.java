@@ -11,7 +11,7 @@ public final class TraceCountCalculator {
         // utility class
     }
 
-    public static int calculateTraceCount(final String start, final String end, final int minHops, final int maxHops, final Map<String, Node> nodes) {
+    public static int calculateTraceCountWithHops(final String start, final String end, final int minHops, final int maxHops, final Map<String, Node> nodes) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithHops = new ArrayDeque<>();
         queueWithHops.add(new SimpleEntry<>(nodes.get(start), 0));
@@ -26,6 +26,30 @@ public final class TraceCountCalculator {
                         traceCount++;
                     }
                     queueWithHops.add(new SimpleEntry<>(edge.dest, currentHop));
+                }
+            }
+
+        }
+
+
+        return traceCount;
+    }
+
+    public static int calculateTraceCountWithMaxLatency(final String start, final String end, final int maxLatency, final Map<String, Node> nodes) {
+        int traceCount = 0;
+        Queue<SimpleEntry<Node, Integer>> queueWithLatency = new ArrayDeque<>();
+        queueWithLatency.add(new SimpleEntry<>(nodes.get(start), 0));
+
+        while (!queueWithLatency.isEmpty()) {
+            SimpleEntry<Node, Integer> entry = queueWithLatency.remove();
+            Node currentNode = entry.getKey();
+            for (Edge edge : currentNode.getAdjacentEdges()) {
+                int currentLatency = entry.getValue() + edge.weight;
+                if (currentLatency <= maxLatency) {
+                    if (nodes.get(end).equals(edge.dest)) {
+                        traceCount++;
+                    }
+                    queueWithLatency.add(new SimpleEntry<>(edge.dest, currentLatency));
                 }
             }
 
