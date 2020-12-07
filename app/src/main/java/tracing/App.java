@@ -19,7 +19,9 @@ public final class App {
 
     public static List<String> run() throws IOException {
         String input = FileParser.parse("src/main/resources/input.txt");
+
         Map<String, Node> nodes = GraphGenerator.generateGraphFrom(input);
+
         List<String> outputLines = new ArrayList<>();
         outputLines.add(getAverageLatencyAnswer(1, Arrays.asList("A", "B", "C"), nodes));
         outputLines.add(getAverageLatencyAnswer(2, Arrays.asList("A", "D"), nodes));
