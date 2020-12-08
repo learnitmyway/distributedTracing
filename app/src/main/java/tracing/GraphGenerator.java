@@ -15,7 +15,7 @@ public final class GraphGenerator {
             Node src = addNodeIfNew(nodeIdToNodeMap, attribute.substring(0, 1));
             Node dest = addNodeIfNew(nodeIdToNodeMap, attribute.substring(1, 2));
             int weight = Integer.parseInt(attribute.substring(2));
-            GraphGenerator.addEdgeToSourceNode(new Edge(src, dest, weight));
+            addEdgeToSourceNode(new Edge(src, dest, weight));
         }
 
         return nodeIdToNodeMap;
