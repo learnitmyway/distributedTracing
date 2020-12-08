@@ -12,8 +12,8 @@ public final class GraphGenerator {
         String[] attributes = input.split("Graph: ")[1].split(", ");
         Map<String, Node> nodeIdToNodeMap = new HashMap<>();
         for (String attribute : attributes) {
-            Node src = addNodeIfNew(nodeIdToNodeMap, attribute.substring(0, 1));
-            Node dest = addNodeIfNew(nodeIdToNodeMap, attribute.substring(1, 2));
+            Node src = putNodeIfNew(nodeIdToNodeMap, attribute.substring(0, 1));
+            Node dest = putNodeIfNew(nodeIdToNodeMap, attribute.substring(1, 2));
             int weight = Integer.parseInt(attribute.substring(2));
             addEdgeToSourceNode(new Edge(src, dest, weight));
         }
@@ -21,7 +21,7 @@ public final class GraphGenerator {
         return nodeIdToNodeMap;
     }
 
-    private static Node addNodeIfNew(
+    private static Node putNodeIfNew(
             final Map<String, Node> nodeIdToNodeMap, final String id
     ) {
         if (nodeIdToNodeMap.containsKey(id)) {
