@@ -12,7 +12,7 @@ public final class ShortestTraceCalculator {
 
     /**
      * Dijkstra's algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-     * with a slight variation to account for cycles. In this case it is assume that the node distance cannot be 0
+     * with a slight variation to account for cycles. In this case it is assumes that the node distance cannot be 0
      */
     public static int calculateShortestTrace(final String start, final String end, final Map<String, Node> nodeIdToNodeMap) {
         Map<String, Integer> nodeDistances = new HashMap<>();
@@ -36,6 +36,7 @@ public final class ShortestTraceCalculator {
 
             unvistedNodes.remove(currentNode);
 
+            // we already have reached our destination
             if (end.equals(currentNode.id) && nodeDistances.get(end) != 0) {
                 break;
             }
@@ -45,12 +46,16 @@ public final class ShortestTraceCalculator {
                 if (currentDistance != Integer.MAX_VALUE) {
                     int existingDistanceToDest = nodeDistances.get(edge.dest.id);
                     int distanceToDestFromCurrent = currentDistance + edge.weight;
-                    if (distanceToDestFromCurrent < existingDistanceToDest || existingDistanceToDest == 0) {
+                    if (distanceToDestFromCurrent < existingDistanceToDest) {
                         nodeDistances.put(edge.dest.id, distanceToDestFromCurrent);
                     }
                 }
             }
 
+            // reset start
+            if (nodeDistances.get(start) == 0) {
+                nodeDistances.put(start, Integer.MAX_VALUE);
+            }
         }
 
         return nodeDistances.get(end);
