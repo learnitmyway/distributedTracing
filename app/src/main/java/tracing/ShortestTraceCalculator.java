@@ -25,27 +25,28 @@ public final class ShortestTraceCalculator {
 
         while (!unvistedNodes.isEmpty()) {
             int minDistance = Integer.MAX_VALUE;
-            Node nodeWithMinDistance = unvistedNodes.iterator().next();
+            Node currentNode = unvistedNodes.iterator().next();
             for (Node unvistedNode : unvistedNodes) {
-                Integer unvistedNodeDistance = nodeDistances.get(unvistedNode.id);
+                int unvistedNodeDistance = nodeDistances.get(unvistedNode.id);
                 if (unvistedNodeDistance < minDistance) {
                     minDistance = unvistedNodeDistance;
-                    nodeWithMinDistance = unvistedNode;
+                    currentNode = unvistedNode;
                 }
             }
 
-            unvistedNodes.remove(nodeWithMinDistance);
+            unvistedNodes.remove(currentNode);
 
-            if (end.equals(nodeWithMinDistance.id) && nodeDistances.get(end) != 0) {
+            if (end.equals(currentNode.id) && nodeDistances.get(end) != 0) {
                 break;
             }
 
-            for (Edge edge : nodeWithMinDistance.getAdjacentEdges()) {
-                Integer distance = nodeDistances.get(nodeWithMinDistance.id);
-                if (distance != Integer.MAX_VALUE) {
-                    int potentialMinDistance = distance + edge.weight;
-                    if (potentialMinDistance < nodeDistances.get(edge.dest.id) || nodeDistances.get(edge.dest.id) == 0) {
-                        nodeDistances.put(edge.dest.id, potentialMinDistance);
+            for (Edge edge : currentNode.getAdjacentEdges()) {
+                int currentDistance = nodeDistances.get(currentNode.id);
+                if (currentDistance != Integer.MAX_VALUE) {
+                    int existingDistanceToDest = nodeDistances.get(edge.dest.id);
+                    int distanceToDestFromCurrent = currentDistance + edge.weight;
+                    if (distanceToDestFromCurrent < existingDistanceToDest || existingDistanceToDest == 0) {
+                        nodeDistances.put(edge.dest.id, distanceToDestFromCurrent);
                     }
                 }
             }
