@@ -26,13 +26,13 @@ public class ShortestTraceCalculatorTest {
         c.addEdge(edgeCD);
         c.addEdge(edgeCF);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
+        nodeIdToNodeMap.put(b.id, b);
+        nodeIdToNodeMap.put(c.id, c);
+        nodeIdToNodeMap.put(d.id, d);
+        nodeIdToNodeMap.put(f.id, f);
 
-        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("C", "D", nodes);
+        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("C", "D", nodeIdToNodeMap);
 
         // C -> F -> D
         assertEquals(5, shortestTrace);
@@ -57,14 +57,14 @@ public class ShortestTraceCalculatorTest {
         d.addEdge(edgeDB);
         e.addEdge(edgeEC);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(a.id, a);
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(e.id, e);
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
+        nodeIdToNodeMap.put(a.id, a);
+        nodeIdToNodeMap.put(b.id, b);
+        nodeIdToNodeMap.put(c.id, c);
+        nodeIdToNodeMap.put(d.id, d);
+        nodeIdToNodeMap.put(e.id, e);
 
-        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("A", "C", nodes);
+        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("A", "C", nodeIdToNodeMap);
 
         // A -> D -> B -> C
         assertEquals(6, shortestTrace);
@@ -87,14 +87,14 @@ public class ShortestTraceCalculatorTest {
         c.addEdge(edgeCD);
         d.addEdge(edgeDC);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
+        nodeIdToNodeMap.put(b.id, b);
+        nodeIdToNodeMap.put(c.id, c);
+        nodeIdToNodeMap.put(d.id, d);
+        nodeIdToNodeMap.put(f.id, f);
 
         // D -> C -> D
-        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("D", "D", nodes);
+        int shortestTrace = ShortestTraceCalculator.calculateShortestTrace("D", "D", nodeIdToNodeMap);
         assertEquals(6, shortestTrace);
     }
 }

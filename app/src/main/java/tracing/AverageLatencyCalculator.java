@@ -9,12 +9,12 @@ public final class AverageLatencyCalculator {
         // utility class
     }
 
-    public static int calculateLatency(final List<String> path, final Map<String, Node> nodes) {
+    public static int calculateLatency(final List<String> path, final Map<String, Node> nodeIdToNodeMap) {
         int averageLatency = 0;
         for (int i = 0; i < path.size() - 1; i++) {
             String srcId = path.get(i);
             String destId = path.get(i + 1);
-            Node sourceNode = nodes.get(srcId);
+            Node sourceNode = nodeIdToNodeMap.get(srcId);
             Optional<Edge> edgeWithMatchingDest =
                     findEdgeWithMatchingDest(destId, sourceNode);
             if (edgeWithMatchingDest.isPresent()) {

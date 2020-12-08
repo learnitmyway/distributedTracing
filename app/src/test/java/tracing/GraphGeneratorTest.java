@@ -10,11 +10,11 @@ public class GraphGeneratorTest {
     @Test
     void generatesGraphFromInput() {
         String input = "Graph: DB3, FD9, BF2, BE1, EC7, CE7, CG5, EG6";
-        Map<String, Node> nodes = GraphGenerator.generateGraphFrom(input);
+        Map<String, Node> nodeIdToNodeMap = GraphGenerator.generateGraphFrom(input);
 
-        assertEquals(6, nodes.size());
+        assertEquals(6, nodeIdToNodeMap.size());
 
-        Node e = nodes.get("E");
+        Node e = nodeIdToNodeMap.get("E");
         assertEquals(2, e.getAdjacentEdges().size());
 
         Edge edge1 = e.getAdjacentEdges().get(0);

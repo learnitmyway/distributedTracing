@@ -14,14 +14,14 @@ public final class ShortestTraceCalculator {
      * Dijkstra's algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
      * with a slight variation to account for cycles. In this case it is assume that the node distance cannot be 0
      */
-    public static int calculateShortestTrace(final String start, final String end, final Map<String, Node> nodes) {
+    public static int calculateShortestTrace(final String start, final String end, final Map<String, Node> nodeIdToNodeMap) {
         Map<String, Integer> nodeDistances = new HashMap<>();
-        for (Node node : nodes.values()) {
+        for (Node node : nodeIdToNodeMap.values()) {
             nodeDistances.put(node.id, Integer.MAX_VALUE);
         }
         nodeDistances.put(start, 0);
 
-        Set<Node> unvistedNodes = new HashSet<>(nodes.values());
+        Set<Node> unvistedNodes = new HashSet<>(nodeIdToNodeMap.values());
 
         while (!unvistedNodes.isEmpty()) {
             int minDistance = Integer.MAX_VALUE;

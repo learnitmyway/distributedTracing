@@ -21,11 +21,11 @@ public class AverageLatencyCalculatorTest {
         d.addEdge(edgeDB);
         b.addEdge(edgeBF);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
-        int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("D", "B", "F"), nodes);
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
+        nodeIdToNodeMap.put(b.id, b);
+        nodeIdToNodeMap.put(d.id, d);
+        nodeIdToNodeMap.put(f.id, f);
+        int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("D", "B", "F"), nodeIdToNodeMap);
 
         assertEquals(5, averageLatency);
     }
@@ -41,12 +41,12 @@ public class AverageLatencyCalculatorTest {
         d.addEdge(edgeDB);
         b.addEdge(edgeBF);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
+        nodeIdToNodeMap.put(b.id, b);
+        nodeIdToNodeMap.put(d.id, d);
+        nodeIdToNodeMap.put(f.id, f);
 
-        int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("F", "B", "D"), nodes);
+        int averageLatency = AverageLatencyCalculator.calculateLatency(Arrays.asList("F", "B", "D"), nodeIdToNodeMap);
 
         assertEquals(-1, averageLatency);
     }

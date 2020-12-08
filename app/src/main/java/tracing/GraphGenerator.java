@@ -10,26 +10,26 @@ public final class GraphGenerator {
 
     public static Map<String, Node> generateGraphFrom(final String input) {
         String[] attributes = input.split("Graph: ")[1].split(", ");
-        Map<String, Node> nodes = new HashMap<>();
+        Map<String, Node> nodeIdToNodeMap = new HashMap<>();
         for (String attribute : attributes) {
-            Node src = addNodeIfNew(nodes, attribute.substring(0, 1));
-            Node dest = addNodeIfNew(nodes, attribute.substring(1, 2));
+            Node src = addNodeIfNew(nodeIdToNodeMap, attribute.substring(0, 1));
+            Node dest = addNodeIfNew(nodeIdToNodeMap, attribute.substring(1, 2));
             int weight = Integer.parseInt(attribute.substring(2));
             GraphGenerator.addEdgeToSourceNode(new Edge(src, dest, weight));
         }
 
-        return nodes;
+        return nodeIdToNodeMap;
     }
 
     private static Node addNodeIfNew(
-            final Map<String, Node> nodes, final String id
+            final Map<String, Node> nodeIdToNodeMap, final String id
     ) {
-        if (nodes.containsKey(id)) {
-            return nodes.get(id);
+        if (nodeIdToNodeMap.containsKey(id)) {
+            return nodeIdToNodeMap.get(id);
         }
 
         Node node = new Node(id);
-        nodes.put(id, node);
+        nodeIdToNodeMap.put(id, node);
         return node;
     }
 
