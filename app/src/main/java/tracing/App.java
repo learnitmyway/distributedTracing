@@ -23,7 +23,7 @@ public final class App {
     public static List<String> run() throws IOException {
         String input = FileParser.parse("src/main/resources/input.txt");
 
-        Map<String, Node> nodeIdToNodeMap = GraphGenerator.generateGraphFrom(input);
+        Map<String, Node> nodeIdToNodeMap = GraphGenerator.generateNodesFrom(input);
 
         List<String> outputLines = new ArrayList<>();
         outputLines.add(getAverageLatencyAnswer(1, Arrays.asList("A", "B", "C"), nodeIdToNodeMap));
