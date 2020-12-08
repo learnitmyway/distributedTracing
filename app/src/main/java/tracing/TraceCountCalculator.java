@@ -1,7 +1,6 @@
 package tracing;
 
 import java.util.ArrayDeque;
-import java.util.Map;
 import java.util.Queue;
 
 import static java.util.AbstractMap.SimpleEntry;
@@ -14,10 +13,10 @@ public final class TraceCountCalculator {
     /**
      * A variation of Breadth-First Search where the hop count is used to determine when to stop searching
      */
-    public static int calculateTraceCountWithHops(final String start, final String end, final int minHops, final int maxHops, final Map<String, Node> nodes) {
+    public static int calculateTraceCountWithHops(final Node start, final Node end, final int minHops, final int maxHops) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithHops = new ArrayDeque<>();
-        queueWithHops.add(new SimpleEntry<>(nodes.get(start), 0));
+        queueWithHops.add(new SimpleEntry<>(start, 0));
 
         while (!queueWithHops.isEmpty()) {
             SimpleEntry<Node, Integer> entry = queueWithHops.remove();
@@ -25,7 +24,7 @@ public final class TraceCountCalculator {
             int currentHop = entry.getValue() + 1;
             if (currentHop <= maxHops) {
                 for (Edge edge : currentNode.getAdjacentEdges()) {
-                    if (currentHop >= minHops && nodes.get(end).equals(edge.dest)) {
+                    if (currentHop >= minHops && end.equals(edge.dest)) {
                         traceCount++;
                     }
                     queueWithHops.add(new SimpleEntry<>(edge.dest, currentHop));
@@ -41,10 +40,10 @@ public final class TraceCountCalculator {
     /**
      * A variation of Breadth-First Search where the max latency is used to determine when to stop searching
      */
-    public static int calculateTraceCountWithMaxLatency(final String start, final String end, final int maxLatency, final Map<String, Node> nodes) {
+    public static int calculateTraceCountWithMaxLatency(final Node start, final Node end, final int maxLatency) {
         int traceCount = 0;
         Queue<SimpleEntry<Node, Integer>> queueWithLatency = new ArrayDeque<>();
-        queueWithLatency.add(new SimpleEntry<>(nodes.get(start), 0));
+        queueWithLatency.add(new SimpleEntry<>(start, 0));
 
         while (!queueWithLatency.isEmpty()) {
             SimpleEntry<Node, Integer> entry = queueWithLatency.remove();
@@ -52,7 +51,7 @@ public final class TraceCountCalculator {
             for (Edge edge : currentNode.getAdjacentEdges()) {
                 int currentLatency = entry.getValue() + edge.weight;
                 if (currentLatency <= maxLatency) {
-                    if (nodes.get(end).equals(edge.dest)) {
+                    if (end.equals(edge.dest)) {
                         traceCount++;
                     }
                     queueWithLatency.add(new SimpleEntry<>(edge.dest, currentLatency));

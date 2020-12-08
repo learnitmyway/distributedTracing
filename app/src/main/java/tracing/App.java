@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public final class App {
+
+    public static final String ANSWER_FORMAT = "%d. %s";
+
     private App() {
         // utility class
     }
@@ -28,11 +31,11 @@ public final class App {
         outputLines.add(getAverageLatencyAnswer(3, Arrays.asList("A", "D", "C"), nodes));
         outputLines.add(getAverageLatencyAnswer(4, Arrays.asList("A", "E", "B", "C", "D"), nodes));
         outputLines.add(getAverageLatencyAnswer(5, Arrays.asList("A", "E", "D"), nodes));
-        outputLines.add("6. " + TraceCountCalculator.calculateTraceCountWithHops("C", "C", 1, 3, nodes));
-        outputLines.add("7. " + TraceCountCalculator.calculateTraceCountWithHops("A", "C", 4, 4, nodes));
+        outputLines.add(getTraceCountWithHopsAnswer(6, nodes, "C", "C", 1, 3));
+        outputLines.add(getTraceCountWithHopsAnswer(7, nodes, "A", "C", 4, 4));
         outputLines.add("8. " + ShortestTraceCalculator.calculateShortestTrace("A", "C", nodes));
         outputLines.add("9. " + ShortestTraceCalculator.calculateShortestTrace("B", "B", nodes));
-        outputLines.add("10. " + TraceCountCalculator.calculateTraceCountWithMaxLatency("C", "C", 29, nodes));
+        outputLines.add(getTraceCountWithLatencyAnswer(10, nodes, "C", "C", 29));
 
         return outputLines;
     }
@@ -40,9 +43,29 @@ public final class App {
     private static String getAverageLatencyAnswer(
             final int questionNumber, final List<String> path, final Map<String, Node> nodes) {
         int averageLatency = AverageLatencyCalculator.calculateLatency(path, nodes);
-        return String.format("%d. %s",
+        return String.format(ANSWER_FORMAT,
                 questionNumber,
                 averageLatency > -1 ? averageLatency : "NO SUCH TRACE"
         );
+    }
+
+    private static String getTraceCountWithHopsAnswer(
+            final int questionsNumber, final Map<String, Node> nodes,
+            final String start, final String end, final int minHops, final int maxHops
+    ) {
+        Node startNode = nodes.get(start);
+        Node endNode = nodes.get(end);
+        int traceCount = TraceCountCalculator.calculateTraceCountWithHops(startNode, endNode, minHops, maxHops);
+        return String.format(ANSWER_FORMAT, questionsNumber, traceCount);
+    }
+
+    private static String getTraceCountWithLatencyAnswer(
+            final int questionsNumber, final Map<String, Node> nodes,
+            final String start, final String end, final int maxLatency
+    ) {
+        Node startNode = nodes.get(start);
+        Node endNode = nodes.get(end);
+        int traceCount = TraceCountCalculator.calculateTraceCountWithMaxLatency(startNode, endNode, maxLatency);
+        return String.format(ANSWER_FORMAT, questionsNumber, traceCount);
     }
 }

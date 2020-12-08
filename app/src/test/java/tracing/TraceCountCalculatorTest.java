@@ -2,9 +2,6 @@ package tracing;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TraceCountCalculatorTest {
@@ -25,13 +22,7 @@ public class TraceCountCalculatorTest {
         c.addEdge(edgeCD);
         d.addEdge(edgeDC);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
-
-        int traceCount = TraceCountCalculator.calculateTraceCountWithHops("D", "D", 1, 2, nodes);
+        int traceCount = TraceCountCalculator.calculateTraceCountWithHops(d, d, 1, 2);
 
         // DC -> CD
         assertEquals(1, traceCount);
@@ -54,13 +45,7 @@ public class TraceCountCalculatorTest {
         c.addEdge(edgeCD);
         d.addEdge(edgeDC);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
-
-        int traceCount = TraceCountCalculator.calculateTraceCountWithHops("D", "D", 3, 3, nodes);
+        int traceCount = TraceCountCalculator.calculateTraceCountWithHops(d, d, 3, 3);
 
         // DB -> BF -> FD
         assertEquals(1, traceCount);
@@ -87,13 +72,7 @@ public class TraceCountCalculatorTest {
         d.addEdge(edgeDC);
         d.addEdge(edgeDB);
 
-        Map<String, Node> nodes = new HashMap<>();
-        nodes.put(b.id, b);
-        nodes.put(c.id, c);
-        nodes.put(d.id, d);
-        nodes.put(f.id, f);
-
-        int traceCount = TraceCountCalculator.calculateTraceCountWithMaxLatency("D", "D", 6, nodes);
+        int traceCount = TraceCountCalculator.calculateTraceCountWithMaxLatency(d, d, 6);
 
         // 1. D -> B -> F -> D
         // 2. D -> B -> D
