@@ -23,16 +23,15 @@ Update `app/src/main/resources/input.txt` to change the input
 ## Design
 
 - A `Node` consists of an id and a list of adjacent edges. An `Edge` consists of a source `Node`, a destination `Node`
-  and a weight`. This means the whole graph can be determined from one node
-- The code is more functional than object orientated as I felt it was a better fit for this exercise. I could have used
-  a set instead of a map but then I would have had to interate over the nodes each time. Might have been nicer to read,
-  though.
+  and a weight. This means the whole graph can be determined from one node
+- The code is more functional than object orientated as I felt it was a better fit for this exercise.
+- The graph is represented as a Map with a Node ID as the key (eg. A) and the `Node` as the value.
 - Calculating the trace count with hops or latency is a variation of breadth-first search
 - Calculating the shortest trace is done with Dijkstra's algorithm with a slight variation to account for cycles. In
   this case it assumed that the shortest path cannot be 0
 
 ## Potential improvements
 
-- passing the input file as a command-line argument
-- parsing the questions
+- passing the input file name as a command-line argument
+- parsing different questions
 - A priority queue for Dijkstra's algorithm
