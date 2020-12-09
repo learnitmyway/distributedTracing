@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AverageLatencyCalculatorTest {
 
-    //CHECKSTYLE.OFF: MagicNumber
     @Test
     void calculatesAverageLatency() {
         Node b = new Node("B");
@@ -29,7 +28,6 @@ public class AverageLatencyCalculatorTest {
 
         assertEquals(5, averageLatency);
     }
-    //CHECKSTYLE.ON: MagicNumber
 
     @Test
     void noSuchTrace() {
