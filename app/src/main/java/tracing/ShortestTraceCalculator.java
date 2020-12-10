@@ -24,15 +24,15 @@ public final class ShortestTraceCalculator {
         Set<Node> unvisitedNodes = new HashSet<>(nodeIdToNodeMap.values());
 
         while (!unvisitedNodes.isEmpty()) {
-            Node unvisitedNodeWithMinDistance = unvisitedNodes.stream().reduce(unvisitedNodes.iterator().next(), (acc, unvisitedNode) -> {
-                int unvisitedNodeDistance = nodeDistances.get(unvisitedNode.id);
-                int minDistance = nodeDistances.get(acc.id);
-                if (unvisitedNodeDistance < minDistance) {
-                    return unvisitedNode;
-                }
-
-                return acc;
-            });
+            Node unvisitedNodeWithMinDistance = unvisitedNodes
+                    .stream()
+                    .reduce(
+                            unvisitedNodes.iterator().next(),
+                            (acc, unvisitedNode) -> {
+                                int unvisitedNodeDistance = nodeDistances.get(unvisitedNode.id);
+                                int minDistance = nodeDistances.get(acc.id);
+                                return unvisitedNodeDistance < minDistance ? unvisitedNode : acc;
+                            });
 
             unvisitedNodes.remove(unvisitedNodeWithMinDistance);
 
