@@ -21,28 +21,28 @@ public final class ShortestTraceCalculator {
         }
         nodeDistances.put(start, 0);
 
-        Set<Node> unvistedNodes = new HashSet<>(nodeIdToNodeMap.values());
+        Set<Node> unvisitedNodes = new HashSet<>(nodeIdToNodeMap.values());
 
-        while (!unvistedNodes.isEmpty()) {
-            Node unvistedNodeWithMinDistance = unvistedNodes.stream().reduce(unvistedNodes.iterator().next(), (acc, unvistedNode) -> {
-                int unvistedNodeDistance = nodeDistances.get(unvistedNode.id);
+        while (!unvisitedNodes.isEmpty()) {
+            Node unvisitedNodeWithMinDistance = unvisitedNodes.stream().reduce(unvisitedNodes.iterator().next(), (acc, unvisitedNode) -> {
+                int unvisitedNodeDistance = nodeDistances.get(unvisitedNode.id);
                 int minDistance = nodeDistances.get(acc.id);
-                if (unvistedNodeDistance < minDistance) {
-                    return unvistedNode;
+                if (unvisitedNodeDistance < minDistance) {
+                    return unvisitedNode;
                 }
 
                 return acc;
             });
 
-            unvistedNodes.remove(unvistedNodeWithMinDistance);
+            unvisitedNodes.remove(unvisitedNodeWithMinDistance);
 
             // we already have reached our destination
-            if (end.equals(unvistedNodeWithMinDistance.id) && nodeDistances.get(end) != 0) {
+            if (end.equals(unvisitedNodeWithMinDistance.id) && nodeDistances.get(end) != 0) {
                 break;
             }
 
-            for (Edge edge : unvistedNodeWithMinDistance.getAdjacentEdges()) {
-                int currentDistance = nodeDistances.get(unvistedNodeWithMinDistance.id);
+            for (Edge edge : unvisitedNodeWithMinDistance.getAdjacentEdges()) {
+                int currentDistance = nodeDistances.get(unvisitedNodeWithMinDistance.id);
                 if (currentDistance != Integer.MAX_VALUE) {
                     int existingDistanceToDest = nodeDistances.get(edge.dest.id);
                     int distanceToDestFromCurrent = currentDistance + edge.weight;
