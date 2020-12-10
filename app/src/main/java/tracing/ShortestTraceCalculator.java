@@ -25,24 +25,24 @@ public final class ShortestTraceCalculator {
 
         while (!unvistedNodes.isEmpty()) {
             int minDistance = Integer.MAX_VALUE;
-            Node currentNode = unvistedNodes.iterator().next();
+            Node unvistedNodeWithMinDistance = unvistedNodes.iterator().next();
             for (Node unvistedNode : unvistedNodes) {
                 int unvistedNodeDistance = nodeDistances.get(unvistedNode.id);
                 if (unvistedNodeDistance < minDistance) {
                     minDistance = unvistedNodeDistance;
-                    currentNode = unvistedNode;
+                    unvistedNodeWithMinDistance = unvistedNode;
                 }
             }
 
-            unvistedNodes.remove(currentNode);
+            unvistedNodes.remove(unvistedNodeWithMinDistance);
 
             // we already have reached our destination
-            if (end.equals(currentNode.id) && nodeDistances.get(end) != 0) {
+            if (end.equals(unvistedNodeWithMinDistance.id) && nodeDistances.get(end) != 0) {
                 break;
             }
 
-            for (Edge edge : currentNode.getAdjacentEdges()) {
-                int currentDistance = nodeDistances.get(currentNode.id);
+            for (Edge edge : unvistedNodeWithMinDistance.getAdjacentEdges()) {
+                int currentDistance = nodeDistances.get(unvistedNodeWithMinDistance.id);
                 if (currentDistance != Integer.MAX_VALUE) {
                     int existingDistanceToDest = nodeDistances.get(edge.dest.id);
                     int distanceToDestFromCurrent = currentDistance + edge.weight;
