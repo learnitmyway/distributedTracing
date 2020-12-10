@@ -32,6 +32,9 @@ Update `app/src/main/resources/input.txt` to change the input
 
 ## Potential improvements
 
+- It should be possible to get all paths with Breadth or Depth-First Search based on a condition (eg. max hops). I
+  wonder if it would have been possible to reuse one function and pass it a callback with a condition (eg. hops < max
+  hops)
 - passing the input file name as a command-line argument
 - parsing different questions
 - A priority queue for Dijkstra's algorithm
